@@ -1,6 +1,6 @@
 {
   "name": "simplerdf-fetch",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "description": "Uses Fetch to send and receive SimpleRDF objects over HTTP",
   "main": "index.js",
   "scripts": {
