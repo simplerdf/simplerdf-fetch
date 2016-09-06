@@ -144,6 +144,55 @@ describe('simplerdf-fetch', function () {
         simpleFetchLite.defaults.context = null
       })
     })
+
+    it('should set the SimpleRDF IRI to the request URL', function () {
+      nock('http://example.org')
+        .get('/iri-request-url')
+        .reply(200, function (url, body) {
+          return [200, '<http://example.org/subject> <http://example.org/predicate> "object" .\n', {'Content-Type': 'application/n-triples'}]
+        })
+
+      var customFormats = {
+        parsers: new rdf.Parsers({
+          'application/n-triples': formats.parsers['application/n-triples']
+        }),
+        serializers: new rdf.Serializers({
+          'application/n-triples': formats.serializers['application/n-triples']
+        })
+      }
+
+      return simpleFetchLite('http://example.org/iri-request-url', {formats: customFormats}).then(function (res) {
+        assert.equal(res.simple.iri().toString(), 'http://example.org/iri-request-url')
+      })
+    })
+
+    it('should set the SimpleRDF IRI to the Content-Location header value', function () {
+      nock('http://example.org')
+        .get('/iri-content-location')
+        .reply(200, function (url, body) {
+          return [
+            200,
+            '<http://example.org/subject> <http://example.org/predicate> "object" .\n',
+            {
+              'Content-Location': 'http://example.org/iri',
+              'Content-Type': 'application/n-triples'
+            }
+          ]
+        })
+
+      var customFormats = {
+        parsers: new rdf.Parsers({
+          'application/n-triples': formats.parsers['application/n-triples']
+        }),
+        serializers: new rdf.Serializers({
+          'application/n-triples': formats.serializers['application/n-triples']
+        })
+      }
+
+      return simpleFetchLite('http://example.org/iri-content-location', {formats: customFormats}).then(function (res) {
+        assert.equal(res.simple.iri().toString(), 'http://example.org/iri')
+      })
+    })
   })
 
   describe('standard', function () {

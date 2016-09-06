@@ -11,7 +11,10 @@ function simpleFetch (url, options) {
 
   return options.rdfFetch(url, options).then(function (res) {
     if (res.graph) {
-      res.simple = new SimpleRDF(options.context || simpleFetch.defaults.context, url, res.graph)
+      var context = options.context || simpleFetch.defaults.context
+      var iri = res.headers.get('Content-Location') || url
+
+      res.simple = new SimpleRDF(context, iri, res.graph)
     }
 
     return res
