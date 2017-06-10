@@ -1,5 +1,5 @@
-var rdfFetch = require('rdf-fetch')
-var simpleFetchLite = require('./lite')
+const rdfFetch = require('rdf-fetch')
+const simpleFetchLite = require('./lite')
 
 function simpleFetch (url, options) {
   options = options || {}

@@ -1,23 +1,27 @@
-var rdfFetch = require('rdf-fetch/lite')
-var SimpleRDF = require('simplerdf/dist/lite')
+const rdfFetch = require('rdf-fetch-lite')
+const SimpleRDF = require('simplerdf-core')
 
 function simpleFetch (url, options) {
   options = options || {}
   options.rdfFetch = options.rdfFetch || simpleFetch.defaults.rdfFetch
 
   if (options.body) {
-    options.body = options.body.graph()
+    options.body = options.body.graph().toStream()
   }
 
-  return options.rdfFetch(url, options).then(function (res) {
-    if (res.graph) {
-      var context = options.context || simpleFetch.defaults.context
-      var iri = res.headers.get('Content-Location') || url
-
-      res.simple = new SimpleRDF(context, iri, res.graph)
+  return options.rdfFetch(url, options).then((res) => {
+    if (!res.dataset) {
+      return res
     }
 
-    return res
+    return res.dataset().then((dataset) => {
+      let context = options.context || simpleFetch.defaults.context
+      let iri = res.headers.get('Content-Location') || url
+
+      res.simple = new SimpleRDF(context, iri, dataset)
+
+      return res
+    })
   })
 }
 
