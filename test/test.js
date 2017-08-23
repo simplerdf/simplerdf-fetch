@@ -6,7 +6,7 @@ const nock = require('nock')
 const rdf = require('rdf-ext')
 const simpleFetch = require('..')
 const simpleFetchLite = require('../lite')
-const SimpleRDF = require('simplerdf')
+const SimpleRDF = require('simplerdf-core')
 
 describe('simplerdf-fetch', () => {
   describe('lite', () => {
