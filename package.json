@@ -23,13 +23,14 @@
   },
   "homepage": "https://github.com/bergos/simplerdf-fetch",
   "dependencies": {
-    "rdf-fetch": "^0.3.0",
-    "simplerdf": "^0.2.9"
+    "rdf-fetch": "^1.0.0",
+    "rdf-fetch-lite": "^1.0.0",
+    "simplerdf-core": "git://github.com/simplerdf/simplerdf-core#develop"
   },
   "devDependencies": {
     "mocha": "^2.5.3",
     "nock": "^8.0.0",
-    "rdf-ext": "^0.3.0",
+    "rdf-ext": "^1.0.0",
     "standard": "^7.1.2"
   }
 }
