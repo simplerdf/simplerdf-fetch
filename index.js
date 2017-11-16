@@ -17,9 +17,9 @@ class SimpleFetch extends SimpleFetchLite {
 
   static fetch (url, options) {
     options = options || {}
-    options.rdfFetch = options.rdfFetch || SimpleFetch.defaults.rdfFetch
-    options.formats = options.formats || rdfFetch.defaults.formats
     options.context = options.context || SimpleFetch.defaults.context
+    options.formats = options.formats || rdfFetch.defaults.formats
+    options.rdfFetch = options.rdfFetch || SimpleFetch.defaults.rdfFetch
 
     return SimpleFetchLite.fetch(url, options)
   }
