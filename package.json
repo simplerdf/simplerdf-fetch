@@ -1,11 +1,10 @@
 {
   "name": "simplerdf-fetch",
   "version": "0.3.2",
-  "description": "Uses Fetch to send and receive SimpleRDF objects over HTTP",
+  "description": "Plugin for SimpleRDF to send and receive objects using the Fetch API the most common RDF formats",
   "main": "index.js",
   "scripts": {
-    "lint": "standard",
-    "test": "mocha"
+    "test": "standard && mocha"
   },
   "repository": {
     "type": "git",
@@ -19,18 +18,17 @@
   "author": "Thomas Bergwinkl <bergi@axolotlfarm.org> (https://www.bergnet.org/people/bergi/card#me)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bergos/simplerdf-fetch/issues"
+    "url": "https://github.com/simplerdf/simplerdf-fetch/issues"
   },
-  "homepage": "https://github.com/bergos/simplerdf-fetch",
+  "homepage": "https://github.com/simplerdf/simplerdf-fetch",
   "dependencies": {
     "rdf-fetch": "^1.0.0",
-    "rdf-fetch-lite": "^1.0.0",
-    "simplerdf-core": "git://github.com/simplerdf/simplerdf-core#develop"
+    "simplerdf-core": "^1.0.0",
+    "simplerdf-fetch-lite": "^1.0.0"
   },
   "devDependencies": {
-    "mocha": "^2.5.3",
-    "nock": "^8.0.0",
-    "rdf-ext": "^1.0.0",
-    "standard": "^7.1.2"
+    "mocha": "^4.0.1",
+    "nock": "^9.1.0",
+    "standard": "^10.0.3"
   }
 }
