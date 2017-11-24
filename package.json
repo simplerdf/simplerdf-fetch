@@ -23,8 +23,8 @@
   "homepage": "https://github.com/simplerdf/simplerdf-fetch",
   "dependencies": {
     "rdf-fetch": "^1.0.0",
-    "simplerdf-core": "^1.0.0",
-    "simplerdf-fetch-lite": "^1.0.0"
+    "simplerdf-core": "^1.1.0",
+    "simplerdf-fetch-lite": "^1.1.0"
   },
   "devDependencies": {
     "mocha": "^4.0.1",
