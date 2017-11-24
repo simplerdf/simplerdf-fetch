@@ -67,6 +67,7 @@ describe('simplerdf-fetch', () => {
         })
 
       const simple = new Simple({predicate: 'http://example.org/predicate'}, 'http://example.org/subject')
+
       simple.predicate = 'object'
 
       const headers = {
@@ -80,7 +81,7 @@ describe('simplerdf-fetch', () => {
       })
     })
 
-    it('should receive the SimpleRDF object', () => {
+    it('should receive a SimpleRDF object in res.body', () => {
       nock('http://example.org')
         .get('/receive-body')
         .reply(200, function (url, body) {
@@ -90,7 +91,7 @@ describe('simplerdf-fetch', () => {
         })
 
       return SimpleFetch.fetch('http://example.org/receive-body').then((res) => {
-        const graphString = res.simple.graph().toString().trim()
+        const graphString = res.body.graph().toString().trim()
 
         assert.equal(graphString, '<http://example.org/subject> <http://example.org/predicate> "object" .')
       })
@@ -110,7 +111,7 @@ describe('simplerdf-fetch', () => {
           predicate: 'http://example.org/predicate'
         }
       }).then((res) => {
-        assert.deepEqual(res.simple.context()._json, {predicate: 'http://example.org/predicate'})
+        assert.deepEqual(res.body.context()._json, {predicate: 'http://example.org/predicate'})
       })
     })
 
@@ -126,7 +127,7 @@ describe('simplerdf-fetch', () => {
       SimpleFetch.defaults.context = {predicate: 'http://example.org/predicate'}
 
       return SimpleFetch.fetch('http://example.org/context-options').then((res) => {
-        assert.deepEqual(res.simple.context()._json, {predicate: 'http://example.org/predicate'})
+        assert.deepEqual(res.body.context()._json, {predicate: 'http://example.org/predicate'})
 
         SimpleFetch.defaults.context = null
       })
@@ -142,6 +143,7 @@ describe('simplerdf-fetch', () => {
         })
 
       const simple = new Simple({predicate: 'http://example.org/predicate'}, 'http://example.org/subject')
+
       simple.predicate = 'object'
 
       const headers = {
@@ -156,7 +158,7 @@ describe('simplerdf-fetch', () => {
         assert.equal(res.headers.get('content-type'), 'application/n-triples')
 
         assert.equal(
-          res.simple.graph().toCanonical().trim(),
+          res.body.graph().toCanonical().trim(),
           '<http://example.org/subject> <http://example.org/predicate> "object" .'
         )
       })
@@ -172,6 +174,7 @@ describe('simplerdf-fetch', () => {
         })
 
       const simple = new Simple({predicate: 'http://example.org/predicate'}, 'http://example.org/subject')
+
       simple.predicate = 'object'
 
       const headers = {
@@ -186,7 +189,7 @@ describe('simplerdf-fetch', () => {
         assert.equal(res.headers.get('content-type'), 'application/ld+json')
 
         assert.equal(
-          res.simple.graph().toCanonical().trim(),
+          res.body.graph().toCanonical().trim(),
           '<http://example.org/subject> <http://example.org/predicate> "object" .'
         )
       })
@@ -212,7 +215,7 @@ describe('simplerdf-fetch', () => {
       })
 
       return instance.fetch().then((res) => {
-        const plugins = res.simple._plugins.map(p => p.name).sort()
+        const plugins = res.body._plugins.map(p => p.name).sort()
 
         assert.deepEqual(plugins, ['SimpleFetch', 'SimpleRDF'])
       })

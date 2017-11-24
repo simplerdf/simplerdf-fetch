@@ -23,7 +23,7 @@ Request options:
 
 Response options:
 
-- `simple`: Parsed response body as SimpleRDF object
+- `body`: Parsed response body as SimpleRDF object
 
 ### Examples
 
